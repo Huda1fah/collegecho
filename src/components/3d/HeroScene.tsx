@@ -4,6 +4,7 @@ import { Canvas } from '@react-three/fiber';
 import { Float, PresentationControls, Environment } from '@react-three/drei';
 import { Group } from 'three';
 
+// This component must be used INSIDE the Canvas
 const CampusModels = () => {
   const group = useRef<Group>(null);
   

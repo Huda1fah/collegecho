@@ -1,13 +1,14 @@
 
 import { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { useGLTF, PresentationControls, Environment, Float } from '@react-three/drei';
+import { PresentationControls, Environment, Float } from '@react-three/drei';
 import { Group } from 'three';
 
+// This component must be used INSIDE the Canvas
 function CampusModel() {
   const group = useRef<Group>(null);
   
-  // Use simple geometry for the logo since we can't load actual GLTF models
+  // useFrame must be used inside a component that's a child of Canvas
   useFrame((state) => {
     if (group.current) {
       group.current.rotation.y = state.clock.getElapsedTime() * 0.3;
@@ -45,21 +46,23 @@ function CampusModel() {
 
 export default function LogoAnimation() {
   return (
-    <Canvas camera={{ position: [0, 0, 6], fov: 45 }}>
-      <ambientLight intensity={0.5} />
-      <spotLight position={[5, 5, 5]} angle={0.15} penumbra={1} intensity={1} />
-      <PresentationControls
-        global
-        snap
-        rotation={[0, 0, 0]}
-        polar={[-Math.PI / 4, Math.PI / 4]}
-        azimuth={[-Math.PI / 6, Math.PI / 6]}
-      >
-        <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
-          <CampusModel />
-        </Float>
-      </PresentationControls>
-      <Environment preset="city" />
-    </Canvas>
+    <div className="h-full w-full">
+      <Canvas camera={{ position: [0, 0, 6], fov: 45 }}>
+        <ambientLight intensity={0.5} />
+        <spotLight position={[5, 5, 5]} angle={0.15} penumbra={1} intensity={1} />
+        <PresentationControls
+          global
+          snap
+          rotation={[0, 0, 0]}
+          polar={[-Math.PI / 4, Math.PI / 4]}
+          azimuth={[-Math.PI / 6, Math.PI / 6]}
+        >
+          <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
+            <CampusModel />
+          </Float>
+        </PresentationControls>
+        <Environment preset="city" />
+      </Canvas>
+    </div>
   );
 }
