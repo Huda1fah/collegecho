@@ -4,6 +4,32 @@ import { Canvas } from '@react-three/fiber';
 import { Float, PresentationControls, Environment } from '@react-three/drei';
 import { Group } from 'three';
 
+function HeroSceneContent() {
+  return (
+    <Canvas camera={{ position: [5, 4, 5], fov: 45 }}>
+      <ambientLight intensity={0.5} />
+      <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
+      <PresentationControls
+        global
+        rotation={[0, -Math.PI / 4, 0]}
+        polar={[-Math.PI / 4, Math.PI / 4]}
+        azimuth={[-Math.PI / 4, Math.PI / 4]}
+        config={{ mass: 2, tension: 400 }}
+        snap={{ mass: 4, tension: 300 }}
+      >
+        <Float 
+          speed={1.5} 
+          rotationIntensity={0.5} 
+          floatIntensity={1.5}
+        >
+          <CampusModels />
+        </Float>
+      </PresentationControls>
+      <Environment preset="city" />
+    </Canvas>
+  );
+}
+
 // This component must be used INSIDE the Canvas
 const CampusModels = () => {
   const group = useRef<Group>(null);
@@ -73,28 +99,7 @@ const CampusModels = () => {
 export default function HeroScene() {
   return (
     <div className="h-[400px] w-full">
-      <Canvas camera={{ position: [5, 4, 5], fov: 45 }}>
-        {/* All R3F components are directly inside Canvas */}
-        <ambientLight intensity={0.5} />
-        <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
-        <PresentationControls
-          global
-          rotation={[0, -Math.PI / 4, 0]}
-          polar={[-Math.PI / 4, Math.PI / 4]}
-          azimuth={[-Math.PI / 4, Math.PI / 4]}
-          config={{ mass: 2, tension: 400 }}
-          snap={{ mass: 4, tension: 300 }}
-        >
-          <Float 
-            speed={1.5} 
-            rotationIntensity={0.5} 
-            floatIntensity={1.5}
-          >
-            <CampusModels />
-          </Float>
-        </PresentationControls>
-        <Environment preset="city" />
-      </Canvas>
+      <HeroSceneContent />
     </div>
   );
 }
