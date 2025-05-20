@@ -1,7 +1,7 @@
 
 import { useRef } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Float, PresentationControls, useGLTF, Environment } from '@react-three/drei';
+import { Float, PresentationControls, Environment } from '@react-three/drei';
 import { Group } from 'three';
 
 const CampusModels = () => {
