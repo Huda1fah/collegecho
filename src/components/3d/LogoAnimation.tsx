@@ -44,33 +44,25 @@ function CampusModel() {
   );
 }
 
-// This component wraps the model and includes all R3F-specific components
-function CampusScene() {
-  return (
-    <>
-      <ambientLight intensity={0.5} />
-      <spotLight position={[5, 5, 5]} angle={0.15} penumbra={1} intensity={1} />
-      <PresentationControls
-        global
-        snap
-        rotation={[0, 0, 0]}
-        polar={[-Math.PI / 4, Math.PI / 4]}
-        azimuth={[-Math.PI / 6, Math.PI / 6]}
-      >
-        <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
-          <CampusModel />
-        </Float>
-      </PresentationControls>
-      <Environment preset="city" />
-    </>
-  );
-}
-
 export default function LogoAnimation() {
   return (
     <div className="h-full w-full">
       <Canvas camera={{ position: [0, 0, 6], fov: 45 }}>
-        <CampusScene />
+        {/* All R3F components are directly inside Canvas */}
+        <ambientLight intensity={0.5} />
+        <spotLight position={[5, 5, 5]} angle={0.15} penumbra={1} intensity={1} />
+        <PresentationControls
+          global
+          snap
+          rotation={[0, 0, 0]}
+          polar={[-Math.PI / 4, Math.PI / 4]}
+          azimuth={[-Math.PI / 6, Math.PI / 6]}
+        >
+          <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
+            <CampusModel />
+          </Float>
+        </PresentationControls>
+        <Environment preset="city" />
       </Canvas>
     </div>
   );
