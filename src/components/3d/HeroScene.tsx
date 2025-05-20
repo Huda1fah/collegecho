@@ -4,9 +4,20 @@ import { Canvas } from '@react-three/fiber';
 import { Float, PresentationControls, Environment } from '@react-three/drei';
 import { Group } from 'three';
 
-function HeroSceneContent() {
+export default function HeroScene() {
   return (
-    <Canvas camera={{ position: [5, 4, 5], fov: 45 }}>
+    <div className="h-[400px] w-full">
+      <Canvas camera={{ position: [5, 4, 5], fov: 45 }}>
+        <Scene />
+      </Canvas>
+    </div>
+  );
+}
+
+// Everything that uses R3F hooks must be inside Canvas
+function Scene() {
+  return (
+    <>
       <ambientLight intensity={0.5} />
       <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
       <PresentationControls
@@ -26,7 +37,7 @@ function HeroSceneContent() {
         </Float>
       </PresentationControls>
       <Environment preset="city" />
-    </Canvas>
+    </>
   );
 }
 
@@ -95,11 +106,3 @@ const CampusModels = () => {
     </group>
   );
 };
-
-export default function HeroScene() {
-  return (
-    <div className="h-[400px] w-full">
-      <HeroSceneContent />
-    </div>
-  );
-}

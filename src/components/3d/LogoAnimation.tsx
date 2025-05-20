@@ -4,9 +4,20 @@ import { Canvas } from '@react-three/fiber';
 import { PresentationControls, Environment, Float } from '@react-three/drei';
 import { Group } from 'three';
 
-function LogoAnimationScene() {
+export default function LogoAnimation() {
   return (
-    <Canvas camera={{ position: [0, 0, 6], fov: 45 }}>
+    <div className="h-full w-full">
+      <Canvas camera={{ position: [0, 0, 6], fov: 45 }}>
+        <Scene />
+      </Canvas>
+    </div>
+  );
+}
+
+// Everything that uses R3F hooks must be inside Canvas
+function Scene() {
+  return (
+    <>
       <ambientLight intensity={0.5} />
       <spotLight position={[5, 5, 5]} angle={0.15} penumbra={1} intensity={1} />
       <PresentationControls
@@ -21,11 +32,10 @@ function LogoAnimationScene() {
         </Float>
       </PresentationControls>
       <Environment preset="city" />
-    </Canvas>
+    </>
   );
 }
 
-// This component must be used INSIDE the Canvas, so it's defined separately
 function CampusModel() {
   const group = useRef<Group>(null);
   
@@ -55,13 +65,5 @@ function CampusModel() {
         <meshStandardMaterial color="#000080" /> {/* Navy color */}
       </mesh>
     </group>
-  );
-}
-
-export default function LogoAnimation() {
-  return (
-    <div className="h-full w-full">
-      <LogoAnimationScene />
-    </div>
   );
 }
