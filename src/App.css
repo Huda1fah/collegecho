@@ -1,7 +1,7 @@
+
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
   text-align: center;
 }
 
@@ -11,9 +11,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -33,10 +35,21 @@
   }
 }
 
-.card {
-  padding: 2em;
+/* 3D effects */
+.hover-float {
+  transition: transform 0.3s ease;
 }
 
-.read-the-docs {
-  color: #888;
+.hover-float:hover {
+  transform: translateY(-10px);
+}
+
+.appear-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.card-3d-hover:hover {
+  transform: rotateY(5deg) rotateX(5deg) translateZ(10px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
 }
